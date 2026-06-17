@@ -1,0 +1,128 @@
+/* ============================================================
+   index.css — Vibe Update 🚀🎮✨
+   ------------------------------------------------------------
+   Mais moderno, mais “game UI”, mais energia, sem perder azul
+   ============================================================ */
+
+/* Reset base */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  /* ================= BACKGROUND ================= */
+  --bg-dark: #070d18;        /* mais profundo, mais “tech” */
+  --bg-card: #0e1a2b;
+  --bg-card2: #14263d;
+
+  /* glow geral de fundo (efeito vibe moderna) */
+  --bg-glow: radial-gradient(
+    circle at top,
+    rgba(59, 130, 246, 0.12),
+    transparent 60%
+  );
+
+  /* ================= ACCENT ================= */
+  --accent: #3b82f6;
+  --accent-light: #93c5fd;
+  --accent-glow: rgba(59, 130, 246, 0.28);
+
+  /* extra neon vibe */
+  --accent-neon: #60a5fa;
+
+  /* ================= SECONDARY ================= */
+  --teal: #38bdf8;
+  --teal-light: #7dd3fc;
+  --teal-glow: rgba(56, 189, 248, 0.25);
+
+  /* ================= FEEDBACK COLORS ================= */
+  --amber: #fbbf24;
+  --amber-bg: rgba(251, 191, 36, 0.12);
+
+  --coral: #fb7185;
+  --coral-bg: rgba(251, 113, 133, 0.12);
+
+  /* ================= TEXT ================= */
+  --text-primary: #eaf2ff;
+  --text-secondary: #9fb4d6;
+  --text-muted: #60759a;
+
+  /* ================= UI ================= */
+  --border: rgba(59, 130, 246, 0.18);
+  --border-subtle: rgba(255, 255, 255, 0.05);
+
+  --radius: 14px;
+  --radius-sm: 10px;
+
+  /* sombra mais “game UI” */
+  --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.35);
+  --shadow-glow: 0 0 25px rgba(59, 130, 246, 0.18);
+
+  /* ================= FONTS ================= */
+  --font-main: 'Space Grotesk', sans-serif;
+  --font-mono: 'Space Mono', monospace;
+}
+
+/* BODY com vibe mais viva */
+body {
+  font-family: var(--font-main);
+  min-height: 100vh;
+  overflow-x: hidden;
+
+  color: var(--text-primary);
+
+  background: var(--bg-dark);
+  position: relative;
+}
+
+/* glow de fundo global */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: var(--bg-glow);
+  pointer-events: none;
+  z-index: 0;
+}
+
+#root {
+  min-height: 100vh;
+  position: relative;
+  z-index: 1;
+}
+
+/* botões mais “game feel” */
+button {
+  font-family: var(--font-main);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+}
+
+/* inputs mais modernos */
+input {
+  font-family: var(--font-main);
+}
+
+/* scroll mais fino e “neon” */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    var(--accent),
+    var(--teal)
+  );
+  border-radius: 10px;
+  box-shadow: var(--shadow-glow);
+}

@@ -1,0 +1,135 @@
+/* ============================================================
+   App.module.css (FESTA / ARCADE MODE 🎮✨)
+   ============================================================ */
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  /* fundo mais vivo */
+  background: radial-gradient(circle at top, #1a1a2e, #0b0b14 70%);
+  overflow: hidden;
+}
+
+/* efeito de “neon glow” suave no fundo */
+.app::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif");
+  opacity: 0.04;
+  pointer-events: none;
+}
+
+/* ============================
+   TOP BAR (modo festa 🎉)
+   ============================ */
+
+.topRail {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0.85rem 1.25rem;
+
+  /* glass + neon */
+  background: rgba(20, 20, 40, 0.6);
+  backdrop-filter: blur(16px);
+
+  border-bottom: 1px solid rgba(0, 255, 255, 0.15);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.08);
+}
+
+/* LOGO estilo arcade */
+.logo {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: 2px;
+
+  color: #00f5ff;
+
+  text-shadow:
+    0 0 5px #00f5ff,
+    0 0 15px #00f5ff,
+    0 0 30px #00f5ff;
+
+  animation: glowPulse 2s infinite alternate;
+}
+
+/* animação neon */
+@keyframes glowPulse {
+  from {
+    filter: brightness(1);
+  }
+  to {
+    filter: brightness(1.4);
+  }
+}
+
+/* badge da ronda mais “game show” */
+.roundPill {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 800;
+
+  color: #fff;
+
+  background: linear-gradient(135deg, #ff00cc, #3333ff);
+  border: none;
+
+  border-radius: 999px;
+  padding: 5px 14px;
+
+  box-shadow:
+    0 0 10px rgba(255, 0, 204, 0.4),
+    0 0 20px rgba(51, 51, 255, 0.3);
+
+  animation: pop 1.5s infinite ease-in-out;
+}
+
+/* efeito de “bounce leve” */
+@keyframes pop {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+
+/* ============================
+   MAIN AREA
+   ============================ */
+
+.main {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 12px;
+}
+
+/* ============================
+   EXTRA: efeito “confetti vibe”
+   (opcional para overlays)
+   ============================ */
+
+.confettiHint::after {
+  content: "🎉 😂 🔥 💃 🕺";
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+
+  font-size: 14px;
+  opacity: 0.7;
+
+  animation: float 3s infinite ease-in-out;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
