@@ -345,16 +345,13 @@ export default function CameraView({
       {status === 'running' && active && (
         <div className={styles.hud}>
           <div>Jogador {playerNum}</div>
-          <div>Letra alvo: {targetLetter}</div>
 
-          <div>Score: {Math.round(tScore * 100)}%</div>
 
           {isMatch && (
             <div>Confirmação: {confPct}%</div>
           )}
 
           <div>
-            {detected || 'Sem deteção'}
           </div>
         </div>
       )}

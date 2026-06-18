@@ -419,7 +419,7 @@ export function classifyPose(keypoints) {
 
   // Confiança mínima de 0.40, e tem de estar pelo menos 0.08 acima
   // da segunda melhor letra (evita confirmar quando há ambiguidade)
-  if (bestScore < 0.40 || (bestScore - secondScore) < 0.08) {
+  if (bestScore < 0.30 || (bestScore - secondScore) < 0.05) {
     return { letter: null, confidence: bestScore, scores };
   }
 

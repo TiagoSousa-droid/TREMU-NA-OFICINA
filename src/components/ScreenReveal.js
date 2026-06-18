@@ -1,23 +1,10 @@
 import React, { useState } from 'react';
 import styles from './ScreenReveal.module.css';
+import LetterPoseGuide from './LetterPoseGuide';
 
-/* ============================================================
-   ScreenReveal.js
-   ------------------------------------------------------------
-   Ecrã onde a palavra da ronda é revelada — mas só depois de
-   se clicar em "Revelar Palavra" (assim só o árbitro vê o
-   ecrã nesse momento, e não os jogadores).
-
-   Depois de revelada, mostra também instruções: que jogador
-   forma que letra, e a ordem obrigatória (1 → 2 → 3 → 4).
-
-   O botão "Começar a Adivinhar" só fica ativo depois de a
-   palavra ter sido revelada, e chama `onNext` (do App.js) para
-   avançar para o ecrã de jogo (ScreenGuess).
-   ============================================================ */
+const ALL_LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 
 export default function ScreenReveal({ word, round, totalRounds, onNext }) {
-  // Controla se a palavra já foi revelada nesta ronda
   const [revealed, setRevealed] = useState(false);
 
   return (
@@ -30,9 +17,7 @@ export default function ScreenReveal({ word, round, totalRounds, onNext }) {
         <p className={styles.sub}>Apenas o árbitro deve ver esta palavra</p>
       </div>
 
-      {/* Cartão central: antes de revelar, mostra o botão "olho";
-          depois de revelar, mostra as 4 letras da palavra,
-          a categoria e a dica. */}
+      {/* Cartão central com a palavra */}
       <div className={styles.wordCard}>
         {!revealed ? (
           <button className={styles.revealBtn} onClick={() => setRevealed(true)}>
@@ -56,8 +41,22 @@ export default function ScreenReveal({ word, round, totalRounds, onNext }) {
         )}
       </div>
 
-      {/* Lista de instruções: cada jogador e a letra que lhe calhou.
-          Só aparece depois de a palavra ser revelada. */}
+      {/* Poses de referência da palavra (só para o árbitro, depois de revelar) */}
+      {revealed && (
+        <div className={styles.wordPoses}>
+          <div className={styles.wordPosesTitle}>🎭 Poses desta ronda (para o árbitro)</div>
+          <div className={styles.wordPosesRow}>
+            {word.w.split('').map((letter, i) => (
+              <div key={i} className={styles.wordPoseItem}>
+                <span className={styles.wordPosePlayer}>Jogador {i + 1}</span>
+                <LetterPoseGuide letter={letter} size={90} />
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Instruções para os jogadores — SEM revelar a letra */}
       {revealed && (
         <div className={styles.instructions}>
           <div className={styles.instrTitle}>📋 Instruções para os jogadores</div>
@@ -66,8 +65,7 @@ export default function ScreenReveal({ word, round, totalRounds, onNext }) {
               <div key={i} className={styles.instrItem}>
                 <span className={styles.instrNum}>Jogador {i + 1}</span>
                 <span className={styles.instrArrow}>→</span>
-                <span className={styles.instrLetter}>Letra "{letter}"</span>
-                <span className={styles.instrSub}>forma com o corpo</span>
+                <span className={styles.instrLetter}>O árbitro diz-te a tua letra em segredo</span>
               </div>
             ))}
           </div>
@@ -77,7 +75,18 @@ export default function ScreenReveal({ word, round, totalRounds, onNext }) {
         </div>
       )}
 
-      {/* Botão só fica clicável (não disabled) depois de revelar a palavra */}
+      {/* Referência completa A-Z — para os jogadores saberem como fazer cada letra */}
+      <div className={styles.refSection}>
+        <div className={styles.refTitle}>📖 Como fazer cada letra (referência para todos)</div>
+        <div className={styles.refGrid}>
+          {ALL_LETTERS.map((letter) => (
+            <div key={letter} className={styles.refItem}>
+              <LetterPoseGuide letter={letter} size={72} />
+            </div>
+          ))}
+        </div>
+      </div>
+
       <button
         className={`${styles.nextBtn} ${!revealed ? styles.nextBtnDisabled : ''}`}
         onClick={onNext}

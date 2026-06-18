@@ -60,7 +60,7 @@ async function getDetector() {
 /**
  * Configuração de performance e estabilidade
  */
-const CONFIRM_FRAMES = 10;        // número de frames para confirmar uma letra
+const CONFIRM_FRAMES = 6;        // número de frames para confirmar uma letra
 const DETECT_INTERVAL_MS = 150;   // intervalo entre inferências do modelo
 
 /**
@@ -344,17 +344,13 @@ export default function CameraView({
 
       {status === 'running' && active && (
         <div className={styles.hud}>
-          <div>Jogador {playerNum}</div>
-          <div>Letra alvo: {targetLetter}</div>
 
-          <div>Score: {Math.round(tScore * 100)}%</div>
 
           {isMatch && (
             <div>Confirmação: {confPct}%</div>
           )}
 
           <div>
-            {detected || 'Sem deteção'}
           </div>
         </div>
       )}
