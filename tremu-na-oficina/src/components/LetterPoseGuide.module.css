@@ -1,0 +1,58 @@
+/* ============================
+   GUIA VISUAL DA POSE (boneco palito)
+   ============================ */
+.wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--bg-dark);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+
+  padding: 6px;
+  flex-shrink: 0;
+}
+
+.svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* "ossos" do boneco */
+.bone {
+  stroke: var(--teal);
+  stroke-width: 4;
+  stroke-linecap: round;
+}
+
+/* cabeça */
+.head {
+  fill: var(--teal);
+}
+
+/* articulações (ombros, cotovelos, pulsos, etc.) */
+.joint {
+  fill: var(--accent);
+  stroke: var(--bg-dark);
+  stroke-width: 1;
+}
+
+/* legenda com a letra, por baixo do boneco */
+.label {
+  margin-top: 2px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--text-primary);
+}
+
+/* estado sem letra definida (placeholder) */
+.placeholder {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-muted);
+}
