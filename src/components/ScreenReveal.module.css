@@ -1,60 +1,130 @@
-/* Poses das letras desta ronda (visível só ao árbitro) */
-.wordPoses {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 1rem;
-  margin-bottom: 1rem;
-}
-.wordPosesTitle {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text-muted);
-  margin-bottom: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-.wordPosesRow {
-  display: flex;
-  gap: 16px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-.wordPoseItem {
+.container {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
-}
-.wordPosePlayer {
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--text-muted);
-  text-transform: uppercase;
-}
-
-/* Grid de referência A-Z */
-.refSection {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 1rem;
-  margin-bottom: 1rem;
-}
-.refTitle {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text-muted);
-  margin-bottom: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-.refGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
-  gap: 8px;
-}
-.refItem {
-  display: flex;
   justify-content: center;
+  min-height: 80vh;
+  gap: 1.75rem;
+  padding: 1rem;
+  text-align: center;
+  overflow: hidden;
+}
+.floatingEmojis {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.floatEmoji {
+  position: absolute;
+  font-size: clamp(20px, 5vw, 32px);
+  opacity: 0.15;
+  animation: floatUp 6s ease-in-out infinite;
+  animation-delay: calc(var(--i) * 0.75s);
+  left: calc(var(--i) * 13%);
+  bottom: -40px;
+}
+@keyframes floatUp {
+  0%   { transform: translateY(0) rotate(0deg); opacity: 0.15; }
+  50%  { opacity: 0.3; }
+  100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+}
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  z-index: 1;
+}
+.roundBadge {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(135deg, #ff00cc, #3333ff);
+  border-radius: 999px;
+  padding: 5px 16px;
+  box-shadow: 0 0 14px rgba(255,0,204,0.4);
+  animation: pop 1.5s infinite ease-in-out;
+}
+@keyframes pop {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(-3px); }
+}
+.title {
+  font-size: clamp(28px, 8vw, 48px);
+  font-weight: 900;
+  color: #00f5ff;
+  text-shadow: 0 0 10px #00f5ff, 0 0 30px #00f5ff;
+  animation: glowPulse 2s infinite alternate;
+}
+@keyframes glowPulse {
+  from { filter: brightness(1); }
+  to   { filter: brightness(1.5); }
+}
+.subtitle {
+  font-size: clamp(13px, 3.5vw, 16px);
+  color: var(--text-secondary);
+}
+.wordCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.85rem;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(0,245,255,0.2);
+  border-radius: var(--radius);
+  padding: 1.5rem 2.5rem;
+  box-shadow: 0 0 30px rgba(0,245,255,0.08);
+  z-index: 1;
+}
+.categoryTag {
+  font-size: clamp(12px, 3vw, 14px);
+  font-weight: 700;
+  color: var(--teal-light);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+.hint {
+  font-size: clamp(14px, 4vw, 18px);
+  color: var(--amber);
+  font-weight: 600;
+}
+.readyBtn {
+  z-index: 1;
+  padding: 16px 40px;
+  font-size: clamp(15px, 4vw, 18px);
+  font-weight: 800;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(135deg, #00f5ff, #3333ff);
+  color: #fff;
+  box-shadow: 0 0 20px rgba(0,245,255,0.4), 0 0 40px rgba(51,51,255,0.3);
+  letter-spacing: 1px;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.readyBtn:hover {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0 0 30px rgba(0,245,255,0.6), 0 0 60px rgba(51,51,255,0.4);
+}
+.nextBtn {
+  z-index: 1;
+  padding: 16px 40px;
+  font-size: clamp(15px, 4vw, 18px);
+  font-weight: 800;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(135deg, #ff00cc, #ff6600);
+  color: #fff;
+  box-shadow: 0 0 20px rgba(255,0,204,0.5), 0 0 40px rgba(255,102,0,0.3);
+  letter-spacing: 1px;
+  animation: pulse 1s infinite ease-in-out;
+  transition: transform 0.15s;
+}
+.nextBtn:hover {
+  transform: translateY(-3px) scale(1.05);
+}
+@keyframes pulse {
+  0%,100% { box-shadow: 0 0 20px rgba(255,0,204,0.5), 0 0 40px rgba(255,102,0,0.3); }
+  50%      { box-shadow: 0 0 35px rgba(255,0,204,0.8), 0 0 60px rgba(255,102,0,0.5); }
 }

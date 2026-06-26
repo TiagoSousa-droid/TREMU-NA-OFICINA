@@ -1,10 +1,11 @@
 .container {
-  max-width: 600px;
+  width: 100%;
+  max-width: 480px;
   margin: 0 auto;
-  padding: 1rem 1rem 2rem;
+  padding: 0.75rem 0.75rem 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: 0.9rem;
+  gap: 0.75rem;
 }
 .topBar { display:flex; align-items:center; gap:10px; }
 .roundBadge {
@@ -13,15 +14,11 @@
   border:1px solid var(--accent); border-radius:4px;
   padding:4px 10px; flex-shrink:0;
 }
-.timerWrap { flex:1; display:flex; flex-direction:column; gap:3px; }
-.timerNum { font-family:var(--font-mono); font-size:18px; font-weight:700; text-align:right; transition:color 0.5s; }
-.timerBar { height:5px; background:var(--bg-card2); border-radius:3px; overflow:hidden; }
-.timerFill { height:100%; border-radius:3px; transition:width 1s linear,background 0.5s; }
-.grid { display:flex; flex-direction:column; gap:6px; }
-.gridRow { display:grid; grid-template-columns:repeat(4,1fr); gap:6px; }
+.grid { display:flex; flex-direction:column; gap:5px; }
+.gridRow { display:grid; grid-template-columns:repeat(4,1fr); gap:5px; }
 .cell {
   aspect-ratio:1; display:flex; align-items:center; justify-content:center;
-  font-family:var(--font-mono); font-size:28px; font-weight:700;
+  font-family:var(--font-mono); font-size:clamp(18px, 6vw, 28px); font-weight:700;
   border:2px solid var(--border-subtle); border-radius:var(--radius-sm);
   background:var(--bg-card); color:var(--text-primary);
   text-transform:uppercase; transition:all 0.2s;
@@ -32,51 +29,51 @@
 .cell.empty { opacity:0.3; }
 @keyframes pulse {
   0%,100%{box-shadow:0 0 0 0 rgba(59,130,246,0.3)}
-  50%{box-shadow:0 0 0 10px rgba(59,130,246,0)}
+  50%{box-shadow:0 0 0 8px rgba(59,130,246,0)}
 }
 .playerTurn {
   background:var(--bg-card); border:1px solid var(--border);
-  border-radius:var(--radius-sm); padding:0.65rem 1rem;
-  font-size:14px; color:var(--text-primary);
+  border-radius:var(--radius-sm); padding:0.6rem 0.85rem;
+  font-size:clamp(12px, 3.5vw, 14px); color:var(--text-primary);
 }
 .playerTurnText { flex:1; text-align:left; }
 .playerTurn strong { font-weight:600; color:var(--accent-light); }
 .hintBox {
   background:var(--amber-bg); border:1px solid rgba(245,166,35,0.4);
-  border-radius:var(--radius-sm); padding:0.7rem 1rem;
-  font-size:13px; color:var(--amber);
+  border-radius:var(--radius-sm); padding:0.6rem 0.85rem;
+  font-size:clamp(11px, 3vw, 13px); color:var(--amber);
 }
-.cameraWrap { display:flex; flex-direction:column; gap:8px; }
+.cameraWrap { display:flex; flex-direction:column; gap:6px; }
 .allDone {
   background:var(--teal-bg); border:1px solid var(--teal);
-  border-radius:var(--radius); padding:1rem;
-  text-align:center; font-size:16px; font-weight:600; color:var(--teal);
+  border-radius:var(--radius); padding:0.85rem;
+  text-align:center; font-size:clamp(13px, 4vw, 16px); font-weight:600; color:var(--teal);
 }
-.actions { display:flex; gap:10px; }
+.actions { display:flex; gap:8px; }
 .hintBtn {
-  flex:1; padding:10px; font-size:13px; font-weight:600;
+  flex:1; padding:10px 6px; font-size:clamp(11px, 3vw, 13px); font-weight:600;
   border-radius:var(--radius-sm);
   border:1px solid rgba(245,166,35,0.4); background:var(--amber-bg); color:var(--amber);
 }
 .hintBtn:disabled { opacity:0.45; cursor:not-allowed; }
 .skipBtn {
-  flex:1; padding:10px; font-size:13px; font-weight:600;
+  flex:1; padding:10px 6px; font-size:clamp(11px, 3vw, 13px); font-weight:600;
   border-radius:var(--radius-sm);
   border:1px solid rgba(240,92,92,0.4); background:var(--coral-bg); color:var(--coral);
 }
 .skipBtn:hover { opacity:0.8; }
 .refSection {
   background:var(--bg-card); border:1px solid var(--border);
-  border-radius:var(--radius); padding:0.75rem;
+  border-radius:var(--radius); padding:0.65rem;
 }
-.refTitle { font-size:13px; font-weight:600; color:var(--text-muted); margin-bottom:0.5rem; text-align:center; }
-.refGrid { display:grid; grid-template-columns:repeat(6,1fr); gap:6px; }
+.refTitle { font-size:12px; font-weight:600; color:var(--text-muted); margin-bottom:0.4rem; text-align:center; }
+.refGrid { display:grid; grid-template-columns:repeat(6,1fr); gap:4px; }
 .refItem { display:flex; align-items:center; justify-content:center; }
-.wrongScreen { display:flex; flex-direction:column; align-items:center; gap:1rem; padding:2rem 1rem; text-align:center; }
-.wrongEmoji { font-size:60px; }
-.wrongTitle { font-size:28px; font-weight:700; color:var(--coral); margin:0; }
-.wrongSub { font-size:15px; color:var(--text-muted); margin:0; }
-.wordRow { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; width:100%; }
+.wrongScreen { display:flex; flex-direction:column; align-items:center; gap:0.85rem; padding:1.5rem 0.75rem; text-align:center; }
+.wrongEmoji { font-size:clamp(40px, 12vw, 60px); }
+.wrongTitle { font-size:clamp(20px, 6vw, 28px); font-weight:700; color:var(--coral); margin:0; }
+.wrongSub { font-size:clamp(12px, 3.5vw, 15px); color:var(--text-muted); margin:0; }
+.wordRow { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; width:100%; }
 .wrongLetterBox {
   aspect-ratio:0.85; display:flex; flex-direction:column;
   align-items:center; justify-content:center;
@@ -86,16 +83,16 @@
 .letterWon { border-color:var(--teal); background:var(--teal-bg); }
 .letterLost { border-color:var(--coral); background:var(--coral-bg); }
 .letterPending { opacity:0.4; }
-.letterP { font-size:10px; font-family:var(--font-mono); color:var(--text-muted); position:absolute; top:6px; left:8px; }
-.letterChar { font-family:var(--font-mono); font-size:28px; font-weight:700; }
-.wrongActions { display:flex; gap:10px; width:100%; }
+.letterP { font-size:9px; font-family:var(--font-mono); color:var(--text-muted); position:absolute; top:5px; left:6px; }
+.letterChar { font-family:var(--font-mono); font-size:clamp(18px, 6vw, 28px); font-weight:700; }
+.wrongActions { display:flex; gap:8px; width:100%; }
 .wrongRetryBtn {
-  flex:1; padding:12px; font-size:14px; font-weight:600;
+  flex:1; padding:11px; font-size:clamp(12px, 3.5vw, 14px); font-weight:600;
   border-radius:var(--radius-sm); border:1px solid var(--teal);
   background:var(--teal-bg); color:var(--teal);
 }
 .wrongSkipBtn {
-  flex:1; padding:12px; font-size:14px; font-weight:600;
+  flex:1; padding:11px; font-size:clamp(12px, 3.5vw, 14px); font-weight:600;
   border-radius:var(--radius-sm); border:1px solid rgba(240,92,92,0.4);
   background:var(--coral-bg); color:var(--coral);
 }

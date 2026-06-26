@@ -1,43 +1,39 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './ScreenReveal.module.css';
-import LetterPoseGuide from './LetterPoseGuide';
+
+const emojis = ['🕺', '💃', '🎯', '🔥', '⚡', '🎮', '👾', '🚂'];
 
 export default function ScreenReveal({ word, round, totalRounds, onNext }) {
+  const [ready, setReady] = useState(false);
+
   return (
     <div className={styles.container}>
+      <div className={styles.floatingEmojis}>
+        {emojis.map((e, i) => (
+          <span key={i} className={styles.floatEmoji} style={{ '--i': i }}>{e}</span>
+        ))}
+      </div>
+
       <div className={styles.header}>
-        <span className={styles.roundBadge}>RONDA {round} / {totalRounds}</span>
-        <h2 className={styles.title}>Palavra Secreta</h2>
+        <span className={styles.roundBadge}>🎮 RONDA {round} / {totalRounds}</span>
+        <h2 className={styles.title}>Preparem-se!!</h2>
+        <p className={styles.subtitle}>Formem as letras com o corpo 🙆</p>
       </div>
 
       <div className={styles.wordCard}>
-        <div className={styles.letterRow}>
-          {word.w.split('').map((letter, i) => (
-            <div key={i} className={styles.letterBox}>
-              <span className={styles.playerTag}>P{i + 1}</span>
-              <span className={styles.letterChar}>{letter}</span>
-            </div>
-          ))}
-        </div>
-        <div className={styles.categoryTag}>{word.c}</div>
+        <div className={styles.categoryTag}>📦 {word.c}</div>
         <p className={styles.hint}>💡 {word.h}</p>
       </div>
 
-      <div className={styles.wordPoses}>
-        <div className={styles.wordPosesTitle}>🎭 Poses desta ronda</div>
-        <div className={styles.wordPosesRow}>
-          {word.w.split('').map((letter, i) => (
-            <div key={i} className={styles.wordPoseItem}>
-              <span className={styles.wordPosePlayer}>Jogador {i + 1}</span>
-              <LetterPoseGuide letter={letter} size={90} />
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <button className={styles.nextBtn} onClick={onNext}>
-        ▶ Começar a Adivinhar
-      </button>
+      {!ready ? (
+        <button className={styles.readyBtn} onClick={() => setReady(true)}>
+          👍 Estamos prontos!
+        </button>
+      ) : (
+        <button className={styles.nextBtn} onClick={onNext}>
+          🚀 Vamos lá!!
+        </button>
+      )}
     </div>
   );
 }

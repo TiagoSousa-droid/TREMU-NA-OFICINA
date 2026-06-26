@@ -48,7 +48,7 @@
 /* LOGO estilo arcade */
 .logo {
   font-family: var(--font-mono);
-  font-size: 14px;
+  font-size: clamp(10px, 3vw, 14px);
   font-weight: 900;
   letter-spacing: 2px;
 
@@ -123,7 +123,7 @@
   bottom: 10px;
   right: 10px;
 
-  font-size: 14px;
+  font-size: clamp(10px, 3vw, 14px);
   opacity: 0.7;
 
   animation: float 3s infinite ease-in-out;

@@ -3,13 +3,11 @@ import styles from './ScreenGuess.module.css';
 import CameraView from './CameraView';
 import LetterPoseGuide from './LetterPoseGuide';
 
-const TIMER_SECONDS = 90;
 const ALL_LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 
 export default function ScreenGuess({ word, round, totalRounds, onResult }) {
   const [guess, setGuess] = useState(['', '', '', '']);
   const [slot, setSlot] = useState(0);
-  const [timeLeft, setTimeLeft] = useState(TIMER_SECONDS);
   const [hintUsed, setHintUsed] = useState(false);
   const [showHint, setShowHint] = useState(false);
   const [wrongLetter, setWrongLetter] = useState(null);
@@ -23,17 +21,9 @@ export default function ScreenGuess({ word, round, totalRounds, onResult }) {
   const finishRound = useCallback((isWon) => {
     if (finishedRef.current) return;
     finishedRef.current = true;
-    const bonus = isWon && timeLeft > 45 ? 5 : 0;
     const base = isWon ? (hintUsed ? 5 : 10) : 0;
-    onResult({ won: isWon, pts: base + bonus, hintUsed });
-  }, [timeLeft, hintUsed, onResult]);
-
-  useEffect(() => {
-    if (timeLeft <= 0) { finishRound(false); return; }
-    if (wrongLetter) return;
-    const id = setInterval(() => setTimeLeft(t => t - 1), 1000);
-    return () => clearInterval(id);
-  }, [timeLeft, finishRound, wrongLetter]);
+    onResult({ won: isWon, pts: base, hintUsed });
+  }, [hintUsed, onResult]);
 
   const handleLetterDetected = useCallback(() => {
     if (finishedRef.current) return;
@@ -50,9 +40,6 @@ export default function ScreenGuess({ word, round, totalRounds, onResult }) {
       return nxt;
     });
   }, [word, finishRound]);
-
-  const pct = (timeLeft / TIMER_SECONDS) * 100;
-  const timerColor = timeLeft > 60 ? '#4ecdc4' : timeLeft > 30 ? '#f9ca24' : '#ff6b6b';
 
   if (wrongLetter) {
     return (
@@ -82,12 +69,6 @@ export default function ScreenGuess({ word, round, totalRounds, onResult }) {
     <div className={styles.container}>
       <div className={styles.topBar}>
         <span className={styles.roundBadge}>{round}/{totalRounds}</span>
-        <div className={styles.timerWrap}>
-          <span className={styles.timerNum} style={{ color: timerColor }}>{timeLeft}s</span>
-          <div className={styles.timerBar}>
-            <div className={styles.timerFill} style={{ width: `${pct}%`, background: timerColor }} />
-          </div>
-        </div>
       </div>
 
       <div className={styles.grid}>
