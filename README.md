@@ -46,7 +46,7 @@ Abre em `http://localhost:3000`
 
 ## Para Codespace
 
-```bash
+``bash`
 npm install && npm start
 # Torna a porta 3000 pública no menu "Ports"
 ```

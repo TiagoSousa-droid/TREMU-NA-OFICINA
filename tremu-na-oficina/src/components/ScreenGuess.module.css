@@ -1,9 +1,8 @@
-/* ── Layout base ── */
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   padding: 12px 16px 20px;
   min-height: 100vh;
   background: #1a1a2e;
@@ -11,15 +10,14 @@
   font-family: 'Segoe UI', sans-serif;
 }
  
-/* ── Barra superior ── */
+/* Barra superior */
 .topBar {
   width: 100%;
-  max-width: 480px;
+  max-width: 420px;
   display: flex;
   align-items: center;
   gap: 10px;
 }
- 
 .roundBadge {
   font-size: 13px;
   font-weight: 600;
@@ -28,219 +26,90 @@
   padding: 4px 10px;
   white-space: nowrap;
 }
- 
-.timerWrap {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 3px;
-}
- 
-.timerNum {
-  font-size: 14px;
-  font-weight: 700;
-}
- 
-.timerBar {
-  width: 100%;
-  height: 5px;
-  background: #2a2a4a;
-  border-radius: 3px;
-  overflow: hidden;
-}
- 
-.timerFill {
-  height: 100%;
-  border-radius: 3px;
-  transition: width 1s linear;
-}
- 
+.timerWrap { flex: 1; display: flex; flex-direction: column; align-items: flex-end; gap: 3px; }
+.timerNum { font-size: 14px; font-weight: 700; }
+.timerBar { width: 100%; height: 5px; background: #2a2a4a; border-radius: 3px; overflow: hidden; }
+.timerFill { height: 100%; border-radius: 3px; transition: width 1s linear; }
 .modeToggle {
-  background: #2a2a4a;
-  border: none;
-  border-radius: 8px;
-  padding: 6px 10px;
-  font-size: 18px;
-  cursor: pointer;
-  line-height: 1;
+  background: #2a2a4a; border: none; border-radius: 8px;
+  padding: 6px 10px; font-size: 18px; cursor: pointer;
 }
  
-/* ── Grelha Termo ── */
-.termoGrid {
+/* Grelha */
+.grid {
   display: flex;
   flex-direction: column;
   gap: 6px;
   width: 100%;
-  max-width: 380px;
+  max-width: 420px;
 }
- 
-.termoRow {
+.row {
   display: grid;
-  grid-template-columns: repeat(var(--word-len, 5), 1fr);
+  grid-template-columns: repeat(var(--cols, 5), 1fr);
   gap: 6px;
 }
- 
-.termoCell {
+.cell {
   aspect-ratio: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: clamp(18px, 5vw, 28px);
-  font-weight: 700;
+  font-size: clamp(20px, 6vw, 32px);
+  font-weight: 800;
   border-radius: 6px;
   text-transform: uppercase;
   border: 2px solid transparent;
-  transition: background 0.25s, border-color 0.25s;
+  transition: background 0.25s;
   user-select: none;
 }
+.empty   { background: #2a2a4a; border-color: #3a3a5a; }
+.active  { background: #2a2a4a; border-color: #9090cc; }
+.filled  { background: #3a3a5a; border-color: #9090cc; color: #fff; }
+.correct { background: #538d4e; border-color: #538d4e; color: #fff; }
+.present { background: #b59f3b; border-color: #b59f3b; color: #fff; }
+.absent  { background: #3a3a3a; border-color: #3a3a3a; color: #aaa; }
  
-/* estados das células */
-.cell_empty {
-  background: #2a2a4a;
-  border-color: #3a3a5a;
-}
- 
-.cell_active {
-  background: #2a2a4a;
-  border-color: #7c7caa;
-}
- 
-.cell_filled {
-  background: #3a3a5a;
-  border-color: #7c7caa;
-  color: #fff;
-}
- 
-/* submetidas */
-.cell_correct {
-  background: #538d4e;   /* verde Wordle */
-  border-color: #538d4e;
-  color: #fff;
-}
- 
-.cell_present {
-  background: #b59f3b;   /* amarelo Wordle */
-  border-color: #b59f3b;
-  color: #fff;
-}
- 
-.cell_absent {
-  background: #3a3a3a;   /* cinzento escuro */
-  border-color: #3a3a3a;
-  color: #fff;
-}
- 
-/* ── Flash de erro ── */
-.wrongAnim {
-  animation: shake 0.4s ease;
-}
- 
+.shake { animation: shake 0.4s ease; }
 @keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  20%       { transform: translateX(-6px); }
-  40%       { transform: translateX(6px); }
-  60%       { transform: translateX(-4px); }
-  80%       { transform: translateX(4px); }
+  0%,100% { transform: translateX(0); }
+  20%     { transform: translateX(-6px); }
+  40%     { transform: translateX(6px); }
+  60%     { transform: translateX(-4px); }
+  80%     { transform: translateX(4px); }
 }
  
-/* ── Indicador de turno ── */
-.playerTurn {
-  font-size: 14px;
-  color: #b0b0d0;
-  text-align: center;
-}
+/* Câmara */
+.cameraWrap { width: 100%; max-width: 420px; border-radius: 12px; overflow: hidden; }
+.turnLabel { font-size: 13px; color: #aaa; text-align: center; margin-bottom: 6px; }
  
-/* ── Câmara ── */
-.cameraWrap {
-  width: 100%;
-  max-width: 480px;
-  border-radius: 12px;
-  overflow: hidden;
-}
- 
-/* ── Teclado manual ── */
-.keyboard {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  width: 100%;
-  max-width: 480px;
-}
- 
-.keyRow {
-  display: flex;
-  justify-content: center;
-  gap: 5px;
-}
- 
+/* Teclado */
+.keyboard { display: flex; flex-direction: column; gap: 5px; width: 100%; max-width: 420px; }
+.keyRow { display: flex; justify-content: center; gap: 4px; }
 .key {
-  flex: 1;
-  max-width: 40px;
-  height: 52px;
-  border: none;
-  border-radius: 6px;
-  background: #3a3a5a;
-  color: #fff;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.15s;
+  flex: 1; max-width: 38px; height: 50px;
+  border: none; border-radius: 6px;
+  background: #3a3a5a; color: #fff;
+  font-size: 13px; font-weight: 700; cursor: pointer;
 }
+.key:active { transform: scale(0.92); }
+.wide { max-width: 56px; font-size: 16px; }
+.k_correct { background: #538d4e !important; }
+.k_present { background: #b59f3b !important; }
+.k_absent  { background: #3a3a3a !important; color: #666; }
  
-.key:active { transform: scale(0.94); }
- 
-.keyWide {
-  max-width: 60px;
-  font-size: 18px;
-}
- 
-.key_correct { background: #538d4e !important; }
-.key_present { background: #b59f3b !important; }
-.key_absent  { background: #3a3a3a !important; color: #888; }
- 
-/* ── Dica ── */
+/* Dica */
 .hintBox {
-  width: 100%;
-  max-width: 480px;
-  background: #2a2a1a;
-  border: 1px solid #b59f3b;
-  border-radius: 8px;
-  padding: 10px 14px;
-  font-size: 14px;
-  color: #e0d080;
+  width: 100%; max-width: 420px;
+  background: #2a2a1a; border: 1px solid #b59f3b;
+  border-radius: 8px; padding: 10px 14px;
+  font-size: 14px; color: #e0d080;
 }
  
-/* ── Ações ── */
-.actions {
-  display: flex;
-  gap: 10px;
-  width: 100%;
-  max-width: 480px;
-}
- 
+/* Ações */
+.actions { display: flex; gap: 10px; width: 100%; max-width: 420px; }
 .hintBtn, .skipBtn {
-  flex: 1;
-  padding: 10px;
-  border: none;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: opacity 0.15s;
+  flex: 1; padding: 10px; border: none;
+  border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer;
 }
- 
-.hintBtn {
-  background: #b59f3b;
-  color: #fff;
-}
- 
-.hintBtn:disabled {
-  opacity: 0.45;
-  cursor: default;
-}
- 
-.skipBtn {
-  background: #5a2a2a;
-  color: #ffaaaa;
-}
+.hintBtn { background: #b59f3b; color: #fff; }
+.hintBtn:disabled { opacity: 0.4; cursor: default; }
+.skipBtn { background: #5a2a2a; color: #ffaaaa; }
